@@ -1,16 +1,18 @@
 import React from 'react';
 
 export default function Filter(props) {
+    
+    
     return ( 
     	<div>
 	        <label htmlFor='printFilter'>Print Type: </label>
-	            <select aria-label='filter by print' name='filter' id='printFilter' onChange={e => {e.preventDefault(); props.getPrintType(this.value);}}>
+	            <select aria-label='filter by print' name='filter' id='printFilter' onChange={e => {e.preventDefault(); props.getFilterPrint(this.value);}}>
 	                <option value='all'>All</option>
 	                <option value='books'>Books</option>
 	                <option value='magazines'>Magazines</option>
 	            </select>
 	        <label htmlFor='bookFilter'>Book Type: </label> 
-	            <select aria-label='filter by book' name='filter' id='bookFilter'>
+	            <select aria-label='filter by book' name='filter' id='bookFilter' onChange={e => {e.preventDefault(); props.getFilterBook(this.value);}}>
 	                <option value='partial'>Partial</option>
 	                <option value='full'>Full</option>
 	                <option value='free-ebooks'>Free-ebooks</option>
@@ -19,3 +21,4 @@ export default function Filter(props) {
 	            </select>
         </div>
     );}
+

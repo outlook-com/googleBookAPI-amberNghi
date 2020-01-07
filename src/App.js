@@ -28,13 +28,13 @@ export default class App extends React.Component {
  //    ],
 
  // Callback function to update searchTerm
-  function getSearchTerm(term) {
+  getSearchTerm(term) {
   	this.setState({
   		searchTerm: term, 
   		loading: true});
   }
 
-  function getRequest() {
+  getRequest() {
   	fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}:keyes&key=AIzaSyA_RO1uYqbD4lcGprijI3EcIbmvGLUf7T0`)
   	.then(response => 
   		// If error is successful, save data, if not, reject promise

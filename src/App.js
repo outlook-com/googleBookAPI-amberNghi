@@ -7,8 +7,11 @@ export default class App extends React.Component {
   state = {
   	loading: false,
   	error: null,
-  	searchTerm: '',
-    items:[]};
+  	filterPrint: null,
+  	filterBook: null, 
+  	searchTerm: null,
+    items:[]
+  };
 
  // Sample data structure
  //"kind": "books#volumes",
@@ -25,19 +28,21 @@ export default class App extends React.Component {
  //    ],
 
  // Callback function to update searchTerm
-  function getSearchTerm(searchTerm) {
-  	setState({this.state.searchTerm: searchTerm, loading: true});
+  function getSearchTerm(term) {
+  	this.setState({
+  		searchTerm: term, 
+  		loading: true});
   }
 
-  componentDidMount() {
+  function getRequest() {
   	fetch(`https://www.googleapis.com/books/v1/volumes?q=${this.state.searchTerm}:keyes&key=AIzaSyA_RO1uYqbD4lcGprijI3EcIbmvGLUf7T0`)
   	.then(response => 
   		// If error is successful, save data, if not, reject promise
   		response.ok ? 
   		response.json() : 
   		Promise.reject('Something went wrong'))
-  	.then(data => {
-  		this.setState({items, loading: false}))
+  	.then(data =>
+  		this.setState({items: data.items, loading: false}))
   	.catch(error => this.setState({error, loading: false}));
   }
 
@@ -46,12 +51,11 @@ export default class App extends React.Component {
   	return (
     <>
     	<h1>Google Book Search</h1>
-	    <Search getSearchTerm={this.getSearchTerm} />
+	    <Search getSearchTerm={this.getSearchTerm} getRequest={this.getRequest} />
 	    <Filter />
 	    <BookList />
     </>
     );
-  }
-  
+   }
  
 }

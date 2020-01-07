@@ -4,7 +4,7 @@ export default function Book(props) {
 	return (
         <li> 
             <h2>{props.title}</h2> 
-            <img src='' alt=''/>
+            <img src={props.img} alt='book image'/>
           <div>
             <p>{props.author}</p>
             <p>{props.price}</p>

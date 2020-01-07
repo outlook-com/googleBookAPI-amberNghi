@@ -16,7 +16,6 @@ export default class App extends React.Component {
 
  // Updates searchTerm
   getSearchTerm = term => {
-
   	this.setState({
   		searchTerm: term, 
   		loading: true});
@@ -37,17 +36,19 @@ export default class App extends React.Component {
 		}
   		)
 	  .catch(error => this.setState({error, loading: false}));
+	// Clears form on submit
+	document.getElementById('searchForm').reset();
+	this.render();
   }
 
   // Updates filter print
   getFilterPrint = (filterPrint) => {
-	  console.log(filterPrint);
 	  this.setState({filterPrint});
+	  console.log(this.state.filterPrint);
   } 
 
   // Updates filter book
   getFilterBook = (filterBook) => {
-	console.log(filterBook);
 	this.setState({filterBook});
 	} 
 
@@ -57,8 +58,8 @@ export default class App extends React.Component {
     <>
     	<h1>Google Book Search</h1>
 	    <Search getSearchTerm={this.getSearchTerm} getRequest={this.getRequest} />
-	    <Filter getFilter={this.getFilter}/>
-	    {/*<BookList items={this.state.items}/>*/}
+	    <Filter getFilterPrint={this.getFilterPrint} getFilterBook={this.getFilterBook}/>
+	    <BookList items={this.state.items}/>
     </>
     );
    }
